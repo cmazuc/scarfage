@@ -11,9 +11,9 @@ import os.path
 # save data in CSV format to stdout.
 #
 # Usage: ./import.py {-n NUM} >> scarfDB.csv
-# retrieves NUM latest (default 999) scarves frolm scarfage.com
+# retrieves NUM latest (default 3000) scarves frolm scarfage.com
 #
-NUM = '999' #set to 999 to get everything. Query requests most recent NUM entries
+NUM = '3000' #set to 3000 to get everything. Query requests most recent NUM entries
 if len(sys.argv) > 1 and sys.argv[1] == '-n':
     NUM = sys.argv[2]
 
@@ -63,13 +63,13 @@ for scarf in data:
 
     # print get_pretty_print(scarfdata)
     output.writerow([
-        scarfdata['name'],
+        scarfdata['name'].encode('utf-8'),
         scarfdata['body'].encode('utf-8'),
         scarfdata['tags'],
         scarfdata['added'],
         scarfdata['image0'],
         scarfdata['image1'],
-        scarfdata['uid'],
+        scarfdata['uid']
     ])
 
 conn.close()
