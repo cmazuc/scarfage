@@ -25,13 +25,14 @@
     {% endif %}
 </div>
 
+{% if pd.accesslevels[pd.profileuser.accesslevel] == 'banned' %}
+<b>User is Banned</b><br>
+{% else %}
 {% if pd.authuser is undefined or pd.authuser.uid != pd.profileuser.uid %}
     <div class="col-md-4">
         <div align="center">
         {% if pd.accesslevels[pd.profileuser.accesslevel] == 'moderator' %}
         <b>Moderator</b><br>
-        {% elif pd.accesslevels[pd.profileuser.accesslevel] == 'banned' %}
-        <b>Banned</b><br>
         {% elif pd.accesslevels[pd.profileuser.accesslevel] == 'admin' %}
         <b>Admin</b><br>
         {% endif %}
@@ -75,8 +76,6 @@
         <div align="center">
         {% if pd.accesslevels[pd.profileuser.accesslevel] == 'moderator' %}
         <b>Moderator</b><br>
-        {% elif pd.accesslevels[pd.profileuser.accesslevel] == 'banned' %}
-        <b>Banned</b><br>
         {% elif pd.accesslevels[pd.profileuser.accesslevel] == 'admin' %}
         <b>Admin</b><br>
         {% endif %}
@@ -181,6 +180,7 @@
     <div class="col-md-8">
     {{ pd.render_markdown(profile['summary'])|safe }}
     </div>
+{% endif %}
 {% endif %}
 
 {% endblock %}
