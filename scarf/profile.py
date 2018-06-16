@@ -257,6 +257,9 @@ def show_user_profile_collections(username):
     except NoUser:
         return page_not_found()
 
+    if pd.profileuser.accesslevel == 0:
+        return page_not_found()
+
     return render_template('profile/collections.html', pd=pd)
 
 @app.route('/user/<username>/prefs')
