@@ -12,12 +12,12 @@ app.secret_key = config.SECRETKEY
 BANNED = ['.*\.pl$',
           '.*\.ru$',
           '.*\.ovh$',
-          '.*\.servicesp.bid$',
-          '.*\.mailtomee.com$',
+          '.*servicesp.bid$',
+          '.*@mailtomee.com$',
           '.*\.linuxpl.eu$',
-          '.*\.vam2006.eu$',
-          '.*\.eisfeld-gebaeudereinigung.de$',
-          '.*\.salonyfryzjerskie.info$']
+          '.*@vam2006.eu$',
+          '.*@eisfeld-gebaeudereinigung.de$',
+          '.*@salonyfryzjerskie.info$']
 
 logger = logging.getLogger(__name__)
 
