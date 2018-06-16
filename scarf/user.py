@@ -9,6 +9,16 @@ import logging
 import config
 app.secret_key = config.SECRETKEY
 
+BANNED = ['.*\.pl$',
+          '.*\.ru$',
+          '.*\.ovh$',
+          '.*\.servicesp.bid$',
+          '.*\.mailtomee.com$',
+          '.*\.linuxpl.eu$',
+          '.*\.vam2006.eu$',
+          '.*\.eisfeld-gebaeudereinigung.de$',
+          '.*\.salonyfryzjerskie.info$']
+
 logger = logging.getLogger(__name__)
 
 def check_new_user(request, nopass=False):
@@ -39,6 +49,12 @@ def check_new_user(request, nopass=False):
                 if len(pass1) < 6:
                     flash("Your password is too short, it must be at least 6 characters")
                     ret = False
+
+        for regex in BANNED:
+            if re.match(regex, request.form['email']):
+                flash("Fuck you spammer")
+                logger.info('Banned email address rejected: {}'.format(request.form['email']))
+                ret = False
 
         if not re.match("[^@]+@[^@]+\.[^@]+", request.form['email']):
             flash("Invalid email address")
