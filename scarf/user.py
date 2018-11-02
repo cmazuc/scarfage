@@ -14,8 +14,29 @@ BANNED = ['.*\.pl$',
           '.*\.ovh$',
           '.*servicesp.bid$',
           '.*@mailtomee.com$',
+          '.*@maileto.com$',
           '.*\.linuxpl.eu$',
           '.*@vam2006.eu$',
+          '.*\.pw$',
+          '.*\.biz$',
+          '.*\.host$',
+          '.*\.info$',
+          '.*\.surf$',
+          '.*@sporlo.eu$',
+          '.*@zoho.eu$',
+          '.*@shearsplendor.co$',
+          '.*\.mailedu.de$',
+          '.*\.online$',
+          '.*@gmx.com$',
+          '.*@pezhub.org$',
+          '.*@zoho.eu$',
+          '.*@kupony.org$',
+          '.*@hovercraft-italia.eu$',
+          '.*@wrapn.net$',
+          '.*@uhumail.com$',
+          '.*@awsmail.com$',
+          '.*@gebaeudereinigungsfirma.com$',
+          '.*@gartenpflegemuenchen.de$',
           '.*@eisfeld-gebaeudereinigung.de$',
           '.*@salonyfryzjerskie.info$']
 
@@ -52,7 +73,7 @@ def check_new_user(request, nopass=False):
 
         for regex in BANNED:
             if re.match(regex, request.form['email']):
-                flash("Fuck you spammer")
+                flash("This domain has been banned.")
                 logger.info('Banned email address rejected: {}'.format(request.form['email']))
                 ret = False
 
