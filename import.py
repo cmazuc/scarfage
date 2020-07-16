@@ -13,7 +13,7 @@ import os.path
 # Usage: ./import.py {-n NUM} >> scarfDB.csv
 # retrieves NUM latest (default 3000) scarves frolm scarfage.com
 #
-NUM = '3000' #set to 3000 to get everything. Query requests most recent NUM entries
+NUM = '4000' #set to 3000 to get everything. Query requests most recent NUM entries
 if len(sys.argv) > 1 and sys.argv[1] == '-n':
     NUM = sys.argv[2]
 
@@ -23,14 +23,16 @@ def get_pretty_print(json_object):
 
 # format image url
 def image_url(image_id):
+    # print "image_url for "+str(image_id)
     return "https://www.scarfage.com/image/"+str(image_id)+"/full"
+    # return "https://d2tx6l6dxpjuj3.cloudfront.net/resize/1900x400/"+str(image_id)
 
 # retrieve scarf image, and save in local folder named 'testimgs'
 # skip duplicates...
 def save_image_locally(image_id, con):
     filepath='./testimgs/'+str(image_id)+'.jpg'
     if not os.path.isfile(filepath):
-        img_data = requests.get(image_url(image_id)).content
+        img_data = requests.get(image_url(image_id), verify=False).content
         with open(filepath, 'wb') as handler:
             handler.write(img_data)
 
@@ -58,6 +60,7 @@ for scarf in data:
     scarfdata['image0'] = ""
     for i in range(len(scarfdata['images'])):
         # uncomment next line to pull EVERY new image to your local folder
+        # print "retrieving image: "+str(scarf['images'][i])
         save_image_locally(scarf['images'][i], conn)
         scarfdata['image'+str(i)] = image_url(scarfdata['images'][i])
 
